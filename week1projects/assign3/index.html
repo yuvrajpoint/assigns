@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS Assignment 3 - Full UI</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background: #f7f7f7;
+      }
+      section {
+        background: #fff;
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+      }
+      h2 {
+        margin-top: 0;
+      }
+      input,
+      button {
+        margin: 5px 0;
+        padding: 6px 10px;
+        font-size: 1rem;
+      }
+      .output {
+        background: #eaeaea;
+        padding: 10px;
+        margin-top: 10px;
+        white-space: pre-wrap;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>JS Assignment 3 – Solutions</h1>
+
+    <!-- Q1 -->
+    <section>
+      <h2>Q1: Filter Indian States (remove those starting with vowels)</h2>
+      <button onclick="q1()">Show States</button>
+      <div class="output" id="q1-output"></div>
+    </section>
+
+    <!-- Q2 -->
+    <section>
+      <h2>Q2: Reverse Word Order</h2>
+      <input type="text" id="q2-input" value="I love my India" />
+      <button onclick="q2()">Reverse</button>
+      <div class="output" id="q2-output"></div>
+    </section>
+
+    <!-- Q3 -->
+    <section>
+      <h2>Q3: Replace 'INDIA' with 'INDONESIA' using splice</h2>
+      <button onclick="q3()">Replace</button>
+      <div class="output" id="q3-output"></div>
+    </section>
+
+    <!-- Q4 -->
+    <section>
+      <h2>Q4: Count Vowels and Consonants</h2>
+      <input
+        type="text"
+        id="q4-input"
+        value="JavaScript is a powerful language."
+      />
+      <button onclick="q4()">Count</button>
+      <div class="output" id="q4-output"></div>
+    </section>
+
+    <!-- Q5 -->
+    <section>
+      <h2>Q5: Replace wrong word with correct word</h2>
+      <input type="text" id="q5-sentence" value="He is a bad boy" />
+      <input type="text" id="q5-wrong" value="bad" />
+      <input type="text" id="q5-correct" value="good" />
+      <button onclick="q5()">Replace</button>
+      <div class="output" id="q5-output"></div>
+    </section>
+
+    <!-- Q6 -->
+    <section>
+      <h2>Q6: Filter numbers > 5</h2>
+      <button onclick="q6()">Filter</button>
+      <div class="output" id="q6-output"></div>
+    </section>
+
+    <!-- Q7 -->
+    <section>
+      <h2>Q7: Average Scores of Students</h2>
+      <button onclick="q7()">Calculate Averages</button>
+      <div class="output" id="q7-output"></div>
+    </section>
+
+    <!-- Q8 -->
+    <section>
+      <h2>Q8: Repeated Sum of Digits</h2>
+      <input type="number" id="q8-input" value="456" />
+      <button onclick="q8()">Find</button>
+      <div class="output" id="q8-output"></div>
+    </section>
+
+    <!-- Q9 -->
+    <section>
+      <h2>Q9: Count Words in Paragraph</h2>
+      <textarea id="q9-input" rows="3" style="width: 100%">
+This is a sample paragraph with multiple words.</textarea
+      >
+      <button onclick="q9()">Count</button>
+      <div class="output" id="q9-output"></div>
+    </section>
+
+    <!-- Q10 -->
+    <section>
+      <h2>Q10: Reverse a String</h2>
+      <input type="text" id="q10-input" value="Hello" />
+      <button onclick="q10()">Reverse</button>
+      <div class="output" id="q10-output"></div>
+    </section>
+
+    <!-- Q11 -->
+    <section>
+      <h2>Q11: Average Marks of Students</h2>
+      <button onclick="q11()">Calculate</button>
+      <div class="output" id="q11-output"></div>
+    </section>
+
+    <script>
+      function q1() {
+        const states = [
+          "Rajasthan",
+          "Uttar Pradesh",
+          "Odisha",
+          "Andhra Pradesh",
+          "Bihar",
+          "Assam",
+          "Punjab",
+        ];
+        const result = states.filter((state) => !/^[aeiou]/i.test(state));
+        document.getElementById("q1-output").textContent = result.join(", ");
+      }
+
+      function q2() {
+        const str = document.getElementById("q2-input").value;
+        const result = str.split(" ").reverse().join(" ");
+        document.getElementById("q2-output").textContent = result;
+      }
+
+      function q3() {
+        let arr = "INDIA".split("");
+        arr.splice(0, arr.length, ..."INDONESIA");
+        document.getElementById("q3-output").textContent = arr.join("");
+      }
+
+      function q4() {
+        const str = document.getElementById("q4-input").value;
+        const vowels = str.match(/[aeiou]/gi)?.length || 0;
+        const consonants = str.match(/[bcdfghjklmnpqrstvwxyz]/gi)?.length || 0;
+        document.getElementById(
+          "q4-output"
+        ).textContent = `Vowels: ${vowels}, Consonants: ${consonants}`;
+      }
+
+      function q5() {
+        const sentence = document.getElementById("q5-sentence").value;
+        const wrong = document.getElementById("q5-wrong").value;
+        const correct = document.getElementById("q5-correct").value;
+        const fixed = sentence.replace(wrong, correct);
+        document.getElementById("q5-output").textContent = fixed;
+      }
+
+      function q6() {
+        const inputArr = [1, 2, 3, 9, 10, 7, 5, 4, 3];
+        const result = inputArr.filter((num) => num > 5);
+        document.getElementById("q6-output").textContent = result.join(", ");
+      }
+
+      function q7() {
+        const students = [
+          { name: "Ram", scores: [80, 70, 60] },
+          { name: "Mohan", scores: [80, 70, 90] },
+          { name: "Sai", scores: [60, 70, 80] },
+          { name: "Hemang", scores: [90, 90, 80, 80] },
+        ];
+        const result = students
+          .map((student) => {
+            const avg =
+              student.scores.reduce((a, b) => a + b) / student.scores.length;
+            return `${student.name}: ${avg}`;
+          })
+          .join("\n");
+        document.getElementById("q7-output").textContent = result;
+      }
+
+      function q8() {
+        let n = parseInt(document.getElementById("q8-input").value);
+        while (n >= 10) {
+          n = n
+            .toString()
+            .split("")
+            .reduce((a, b) => a + Number(b), 0);
+        }
+        document.getElementById("q8-output").textContent = "Single digit: " + n;
+      }
+
+      function q9() {
+        const para = document.getElementById("q9-input").value;
+        const count = para.trim().split(/\s+/).length;
+        document.getElementById("q9-output").textContent =
+          "Word count: " + count;
+      }
+
+      function q10() {
+        const str = document.getElementById("q10-input").value;
+        const reversed = str.split("").reverse().join("");
+        document.getElementById("q10-output").textContent = reversed;
+      }
+
+      function q11() {
+        const students = [
+          {
+            name: "student1",
+            subjects: {
+              subject1: 44,
+              subject2: 56,
+              subject3: 87,
+              subject4: 97,
+              subject5: 37,
+            },
+          },
+          {
+            name: "student2",
+            subjects: {
+              subject1: 50,
+              subject2: 60,
+              subject3: 70,
+              subject4: 80,
+              subject5: 90,
+            },
+          },
+          {
+            name: "student3",
+            subjects: {
+              subject1: 30,
+              subject2: 40,
+              subject3: 50,
+              subject4: 60,
+              subject5: 70,
+            },
+          },
+        ];
+        const result = students
+          .map((student) => {
+            const scores = Object.values(student.subjects);
+            const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
+            return `${student.name}: Average = ${Math.round(avg)}`;
+          })
+          .join("\n");
+        document.getElementById("q11-output").textContent = result;
+      }
+    </script>
+  </body>
+</html>
