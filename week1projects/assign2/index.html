@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JS Assignment Solutions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    section {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    h2 {
+      margin-top: 0;
+    }
+    input {
+      margin: 5px 0;
+      padding: 5px;
+    }
+    button {
+      margin: 5px 0;
+      padding: 5px 10px;
+    }
+    .output {
+      background: #f4f4f4;
+      padding: 10px;
+      margin-top: 10px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>JS Assignment Solutions</h1>
+
+  <!-- 1️⃣ Even numbers -->
+  <section>
+    <h2>1️⃣ Display Even Numbers 1-100</h2>
+    <button onclick="showEvenNumbers()">Show Even Numbers</button>
+    <div class="output" id="evenOutput"></div>
+  </section>
+
+  <!-- 2️⃣ Calculator -->
+  <section>
+    <h2>2️⃣ Calculator (+, -, *, /)</h2>
+    <input type="number" id="calcNum1" placeholder="Number 1" />
+    <input type="number" id="calcNum2" placeholder="Number 2" />
+    <input type="text" id="calcOp" placeholder="Operator (+ - * /)" maxlength="1" />
+    <button onclick="doCalculate()">Calculate</button>
+    <div class="output" id="calcOutput"></div>
+  </section>
+
+  <!-- 3️⃣ Tax finder -->
+  <section>
+    <h2>3️⃣ Find Tax</h2>
+    <input type="number" id="salary" placeholder="Enter Salary" />
+    <button onclick="findTaxAmount()">Find Tax</button>
+    <div class="output" id="taxOutput"></div>
+  </section>
+
+  <!-- 4️⃣ Sum of product of digits -->
+  <section>
+    <h2>4️⃣ Sum of Product of Digits</h2>
+    <input type="number" id="n1" placeholder="Number 1" />
+    <input type="number" id="n2" placeholder="Number 2" />
+    <button onclick="sumProductDigits()">Calculate</button>
+    <div class="output" id="prodOutput"></div>
+  </section>
+
+  <script>
+    // 1️⃣ Show even numbers
+    function showEvenNumbers() {
+      let evens = "";
+      for (let i = 1; i <= 100; i++) {
+        if (i % 2 === 0) {
+          evens += i + " ";
+        }
+      }
+      document.getElementById("evenOutput").textContent = evens.trim();
+    }
+
+    // 2️⃣ Calculator function
+    function calculate(num1, num2, operator) {
+      switch (operator) {
+        case '+': return num1 + num2;
+        case '-': return num1 - num2;
+        case '*': return num1 * num2;
+        case '/': return num2 !== 0 ? num1 / num2 : 'Cannot divide by zero';
+        default: return 'Invalid operator';
+      }
+    }
+
+    function doCalculate() {
+      const num1 = parseFloat(document.getElementById("calcNum1").value);
+      const num2 = parseFloat(document.getElementById("calcNum2").value);
+      const op = document.getElementById("calcOp").value.trim();
+      const result = calculate(num1, num2, op);
+      document.getElementById("calcOutput").textContent = "Result: " + result;
+    }
+
+    // 3️⃣ Find tax
+    function findTax(salary) {
+      let taxRate;
+      switch (true) {
+        case (salary > 0 && salary <= 500000):
+          taxRate = 0;
+          break;
+        case (salary > 500000 && salary <= 1000000):
+          taxRate = 0.10;
+          break;
+        case (salary > 1000000 && salary <= 1500000):
+          taxRate = 0.20;
+          break;
+        case (salary > 1500000):
+          taxRate = 0.30;
+          break;
+        default:
+          return 'Invalid salary';
+      }
+      return salary * taxRate;
+    }
+
+    function findTaxAmount() {
+      const salary = parseFloat(document.getElementById("salary").value);
+      const tax = findTax(salary);
+      document.getElementById("taxOutput").textContent = "Tax Amount: " + tax;
+    }
+
+    // 4️⃣ Sum of product of digits
+    function sumOfProducts(n1, n2) {
+      let str1 = n1.toString().split('').reverse();
+      let str2 = n2.toString().split('').reverse();
+      let length = Math.max(str1.length, str2.length);
+      let sum = 0;
+      for (let i = 0; i < length; i++) {
+        let d1 = +str1[i] || 0;
+        let d2 = +str2[i] || 0;
+        sum += d1 * d2;
+      }
+      return sum;
+    }
+
+    function sumProductDigits() {
+      const n1 = parseInt(document.getElementById("n1").value);
+      const n2 = parseInt(document.getElementById("n2").value);
+      const result = sumOfProducts(n1, n2);
+      document.getElementById("prodOutput").textContent = "Sum of products: " + result;
+    }
+  </script>
+
+</body>
+</html>
