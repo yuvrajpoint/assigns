@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dynamic CSS Styling</title>
+    <style>
+      .text-here {
+        font-size: 55px;
+        font-family: sans-serif;
+        color: black;
+        text-decoration: none;
+        font-style: normal;
+        font-weight: normal;
+        line-height: normal;
+        text-align: left;
+        letter-spacing: normal;
+        word-spacing: normal;
+      }
+      .stylebt {
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="text-here" id="text-container">This is some example text</div>
+
+    <br />
+    <input type="text" id="colorbox" placeholder="Enter a color (e.g., red)" />
+    <button id="colorchange">Change Colour</button>
+
+    <br /><br />
+
+    <input type="range" id="fontsize" min="10" max="100" value="55" />
+
+    <br /><br />
+
+    <button id="italic" class="stylebt">Italics</button>
+    <button id="underline" class="stylebt">Underline</button>
+    <button id="bold" class="stylebt">Bold</button>
+
+    <br /><br />
+
+    <select id="list">
+      <option value="serif">Serif</option>
+      <option value="sans-serif">Sans-Serif</option>
+      <option value="monospace">Monospace</option>
+      <option value="cursive">Cursive</option>
+      <option value="fantasy">Fantasy</option>
+    </select>
+
+    <br /><br />
+
+    <button id="getstyle">Get CSS</button>
+
+    <br /><br />
+    <p id="css-props"></p>
+
+    <script>
+      const textContainer = document.getElementById("text-container");
+
+      // Color change
+      document
+        .getElementById("colorchange")
+        .addEventListener("click", function () {
+          const color = document.getElementById("colorbox").value;
+          textContainer.style.color = color;
+        });
+
+      // Font size change
+      document
+        .getElementById("fontsize")
+        .addEventListener("input", function () {
+          textContainer.style.fontSize = this.value + "px";
+        });
+
+      // Toggle italic
+      document.getElementById("italic").addEventListener("click", function () {
+        textContainer.style.fontStyle =
+          textContainer.style.fontStyle === "italic" ? "normal" : "italic";
+      });
+
+      // Toggle underline
+      document
+        .getElementById("underline")
+        .addEventListener("click", function () {
+          textContainer.style.textDecoration =
+            textContainer.style.textDecoration === "underline"
+              ? "none"
+              : "underline";
+        });
+
+      // Toggle bold
+      document.getElementById("bold").addEventListener("click", function () {
+        textContainer.style.fontWeight =
+          textContainer.style.fontWeight === "bold" ? "normal" : "bold";
+      });
+
+      // Font family change
+      document.getElementById("list").addEventListener("change", function () {
+        textContainer.style.fontFamily = this.value;
+      });
+
+      // Get CSS properties
+      document
+        .getElementById("getstyle")
+        .addEventListener("click", function () {
+          const style = window.getComputedStyle(textContainer);
+          const colorName = textContainer.style.color || "black";
+
+          const cssText =
+            `color: ${colorName}; ` +
+            `font-size: ${style.fontSize}; ` +
+            `font-family: ${style.fontFamily}; ` +
+            `font-weight: ${style.fontWeight}; ` +
+            `font-style: ${style.fontStyle}; ` +
+            `text-decoration: ${style.textDecorationLine};`;
+
+          document.getElementById("css-props").textContent = cssText;
+        });
+    </script>
+  </body>
+</html>
