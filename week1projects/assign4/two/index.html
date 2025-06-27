@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Create Div Demo</title>
+    <style>
+      #container {
+        border: 2px solid black;
+        padding: 10px;
+        margin-top: 20px;
+        min-height: 100px;
+      }
+
+      .created-div {
+        margin: 10px 0;
+        border: 1px solid gray;
+        background-color: #f0f0f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      label,
+      input,
+      button {
+        margin: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Div Creator</h2>
+    <label>Width (px):</label>
+    <input type="number" id="widthInput" placeholder="e.g. 200" />
+    <label>Height (px):</label>
+    <input type="number" id="heightInput" placeholder="e.g. 100" />
+    <label>Text:</label>
+    <input type="text" id="textInput" placeholder="Enter some text" />
+    <button onclick="handleCreate()">Create Div</button>
+
+    <div id="container"></div>
+
+    <script>
+      // Function to create and append the div
+      function createDiv(width, height, text) {
+        const newDiv = document.createElement("div");
+        newDiv.style.width = width + "px";
+        newDiv.style.height = height + "px";
+        newDiv.textContent = text;
+        newDiv.classList.add("created-div");
+
+        const container = document.getElementById("container");
+        container.appendChild(newDiv);
+      }
+
+      // Attach function to global scope
+      window.createDiv = createDiv;
+
+      // Function to handle button click and call createDiv
+      function handleCreate() {
+        const width = document.getElementById("widthInput").value;
+        const height = document.getElementById("heightInput").value;
+        const text = document.getElementById("textInput").value;
+
+        if (width && height && text) {
+          createDiv(width, height, text);
+        } else {
+          alert("Please enter all values.");
+        }
+      }
+    </script>
+  </body>
+</html>
