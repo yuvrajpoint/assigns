@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JavaScript Tasks Output</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background: #f4f4f4;
+      }
+      .task {
+        background: white;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .task h3 {
+        margin-top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>JavaScript Tasks Output</h1>
+    <div id="output"></div>
+
+    <script>
+      const output = document.getElementById("output");
+
+      function printTask(title, result) {
+        const div = document.createElement("div");
+        div.className = "task";
+        div.innerHTML = `<h3>${title}</h3><pre>${result}</pre>`;
+        output.appendChild(div);
+      }
+
+      // Task 1: let, const, var
+      function scopeDemo() {
+        var a = "I am var (function scoped)";
+        let b = "I am let (block scoped)";
+        const c = "I am const (block scoped)";
+        return `${a}\n${b}\n${c}`;
+      }
+      printTask("1. let, const, var Scope", scopeDemo());
+
+      // Task 2: Return second fruit
+      const fruits = ["Apple", "Banana", "Mango", "Orange", "Grapes"];
+      function getSecondFruit() {
+        return fruits[1];
+      }
+      printTask("2. Second Fruit", getSecondFruit());
+
+      // Task 3: Push and Pop
+      function modifyArray(arr) {
+        arr.push("New Element");
+        arr.pop();
+        return arr;
+      }
+      printTask(
+        "3. Modify Array (Push and Pop)",
+        modifyArray(["One", "Two", "Three"]).join(", ")
+      );
+
+      // Task 4: Square Numbers with map()
+      const numbers = [1, 2, 3, 4, 5];
+      function squareNumbers(arr) {
+        return arr.map((num) => num * num);
+      }
+      printTask("4. Squared Numbers", squareNumbers(numbers).join(", "));
+
+      // Task 5: Filter odd numbers
+      function filterOdds(arr) {
+        return arr.filter((num) => num % 2 !== 0);
+      }
+      printTask("5. Odd Numbers", filterOdds(numbers).join(", "));
+
+      // Task 6: Greeting from object
+      const person = { name: "Yuvraj", age: 21, occupation: "Student" };
+      function greetPerson(obj) {
+        return `Hello, my name is ${obj.name}, I am ${obj.age} years old and work as a ${obj.occupation}.`;
+      }
+      printTask("6. Greet Person", greetPerson(person));
+
+      // Task 7: Rectangle Area
+      function calculateArea(rect) {
+        return rect.width * rect.height;
+      }
+      printTask(
+        "7. Area of Rectangle",
+        calculateArea({ width: 5, height: 10 })
+      );
+
+      // Task 8: Object Keys
+      const sampleObj = { a: 1, b: 2, c: 3 };
+      function getObjectKeys(obj) {
+        return Object.keys(obj);
+      }
+      printTask("8. Object Keys", getObjectKeys(sampleObj).join(", "));
+
+      // Task 9: Merge Objects
+      const obj1 = { x: 10, y: 20 };
+      const obj2 = { y: 30, z: 40 };
+      function mergeObjects(o1, o2) {
+        return Object.assign({}, o1, o2);
+      }
+      const merged = mergeObjects(obj1, obj2);
+      printTask("9. Merged Object", JSON.stringify(merged, null, 2));
+
+      // Task 10: Reduce sum
+      function sumArray(arr) {
+        return arr.reduce((sum, curr) => sum + curr, 0);
+      }
+      printTask("10. Sum of Numbers", sumArray(numbers));
+    </script>
+  </body>
+</html>
